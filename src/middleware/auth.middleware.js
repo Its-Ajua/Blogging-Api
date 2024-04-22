@@ -1,5 +1,5 @@
 import Jwt from "jsonwebtoken";
-import { CustomError } from "../lib/custom-error";
+import { CustomError } from "../lib/custom-error.js";
 
 export const authMiddleware = (req, res, next) => {
   const authorization = req.headers.authorization;

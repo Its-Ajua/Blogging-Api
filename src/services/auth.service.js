@@ -7,7 +7,7 @@ import { CustomError } from "../lib/custom-error.js";
 
 export const login = async (data) => {
     const {email, password} = data;
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).select("+password");
 
     if (!user) {
       throw new CustomError("User not found", 404);
@@ -20,7 +20,7 @@ export const login = async (data) => {
     const token = Jwt.sign(
       {
         _id: user._id,
-        sub: user._id,
+        sub: user.email,
       },
       JWT_SECRET,
       { expiresIn: "1hr" }
